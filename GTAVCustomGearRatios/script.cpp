@@ -245,6 +245,9 @@ void update_npc() {
         npcVehicles.resize(numVehicles);
 
         for (const auto& vehicle : npcVehicles) {
+            if (!ENTITY::DOES_ENTITY_EXIST(vehicle))
+                continue;
+
             // Skip vehicles being managed already
             auto managedConfigIt = std::find_if(currentConfigs.begin(), currentConfigs.end(), [&](const auto& cfgPair) {
                 return vehicle == cfgPair.first;
